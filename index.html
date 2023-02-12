@@ -21,11 +21,7 @@
         body{
             background-color: #fafafa;
         }
-        .card-img-top{
-            max-height: 270px;
-            object-fit: cover;
-            min-height: 12rem;
-        }
+
 
 
 
@@ -60,8 +56,11 @@ a{
     <div class="container " >
 <div class="row justify-content-between my-sm-5  ">
         <div class="  col-sm-5 my-sm-0 mt-4   position-relative  ">
-            <i  id="search" class="bi bi-search position-absolute mt-3 ms-3 translate-middle-y "></i>
-            <input type="text" class="form-control border-0 ps-5 fs-5 shadow-sm " placeholder="Search for a country.." aria-label="Search for a country.." aria-describedby="search">
+            <div class="input-group shadow-sm bg-white">
+                <button class="btn  border-0 m-0 ps-4" id="searchButton">  <i  id="search" class="bi bi-search  "></i> </button>
+
+                <input type="text" class="form-control border-0 ps-3 fs-5  " placeholder="Search for a country.." aria-label="Search for a country.." aria-describedby="searchButton"></div>
+
         </div>
         <div class=" col-sm-auto col-8 my-sm-0 my-5  ">
             <div class=" shadow-sm dropdown bg-white   ">
@@ -88,7 +87,7 @@ a{
     <div class="container">
         <div class="row px-5 px-sm-0  g-xl-5 g-4  ">
             <a class="     col-xl-3 col-md-4   " href="details.html">
-        <div class="card  " >
+        <div class="card  h-100 " >
             <img class="card-img-top img-fluid " src="flags/de.svg" alt="Germany" >
             <div class="card-body fw-semibold">
                 <div class="card-title fs-5 fw-bold">Germany</div>
@@ -100,7 +99,7 @@ a{
     </a>
 
             <a class="   col-xl-3 col-md-4 " href="">
-            <div class="card  " >
+            <div class="card h-100 " >
                 <img class="card-img-top  " src="flags/us.svg" alt="United States of America" >
                 <div class="card-body fw-semibold ">
                     <div class="card-title fs-5 fw-bold">United States of America</div>
@@ -115,7 +114,7 @@ a{
 
 
             <a class="  col-xl-3 col-md-4" href="">
-            <div class="card " >
+            <div class="card  h-100 " >
                 <img class="card-img-top" src="flags/br.svg" alt="Brazil" >
                 <div class="card-body fw-semibold">
                     <div class="card-title fs-5 fw-bold">Brazil</div>
@@ -129,7 +128,7 @@ a{
 
 
             <a class="  col-xl-3 col-md-4" href="">
-            <div class="card " >
+            <div class="card  h-100 " >
                 <img class="card-img-top" src="flags/is.svg" alt="Iceland" >
                 <div class="card-body fw-semibold">
                     <div class="card-title fs-5 fw-bold">Iceland</div>
@@ -145,7 +144,7 @@ a{
 
 
             <a class=" col-xl-3 col-md-4" href="">
-            <div class="card " >
+            <div class="card h-100 " >
                 <img class="card-img-top" src="flags/af.svg" alt="Afghanistan" >
                 <div class="card-body fw-semibold">
                     <div class="card-title fs-5 fw-bold">Afghanistan</div>
@@ -160,7 +159,7 @@ a{
 
 
             <a class=" col-xl-3 col-md-4" href="">
-            <div class="card " >
+            <div class="card  h-100 " >
                 <img class="card-img-top" src="flags/ax.svg" alt="Aland Islands" >
                 <div class="card-body fw-semibold">
                     <div class="card-title fs-5 fw-bold">Aland Islands</div>
@@ -175,7 +174,7 @@ a{
 
 
         <a class=" col-xl-3 col-md-4" href="">
-            <div class="card " >
+            <div class="card  h-100 " >
                 <img class="card-img-top" src="flags/al.svg" alt="Albania" >
                 <div class="card-body fw-semibold">
                     <div class="card-title fs-5 fw-bold">Albania</div>
@@ -187,7 +186,7 @@ a{
         </a>
 
             <a class=" col-xl-3 col-md-4" href="">
-            <div class="card " >
+            <div class="card  h-100 " >
                 <img class="card-img-top" src="flags/dz.svg" alt="Algeria" >
                 <div class="card-body fw-semibold">
                     <div class="card-title fs-5 fw-bold">Algeria</div>
