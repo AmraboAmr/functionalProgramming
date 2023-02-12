@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=0.7">
+    <meta charset="UTF-8">
+    <title>Flags</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        body{
+            font-family: 'Nunito Sans', sans-serif;
+        }
+
+        #search{
+            color: darkgray;
+        }
+
+        body{
+            background-color: #fafafa;
+        }
+        .card-img-top{
+            max-height: 270px;
+            object-fit: cover;
+            min-height: 12rem;
+        }
+
+
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+
+
+
+    </style>
+</head>
+<body  >
+<header class=" shadow-sm bg-white   ">
+    <div class="container d-flex flex--sm-wrap  ">
+        <span class="me-auto fw-bold p-4 h3"  >
+       Where in the world?
+   </span  >
+        <span class="fs-5 m-4 fw-semibold" >
+        <i  class="bi bi-moon me-1 mb-1"></i>
+
+         Dark Mode
+    </span>
+    </div>
+
+
+</header>
+
+<main >
+
+    <div class="container " >
+<div class="row justify-content-between my-sm-5  ">
+        <div class="  col-sm-5 my-sm-0 mt-4   position-relative  ">
+            <i  id="search" class="bi bi-search position-absolute mt-3 ms-3 translate-middle-y "></i>
+            <input type="text" class="form-control border-0 ps-5 fs-5 shadow-sm " placeholder="Search for a country.." aria-label="Search for a country.." aria-describedby="search">
+        </div>
+        <div class=" col-sm-auto col-8 my-sm-0 my-5  ">
+            <div class=" shadow-sm dropdown bg-white   ">
+                <button style="" class="w-100 btn btn-white fs-5 fw-semibold border-0 m-0 p-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filter by Region <i class="ms-2 ps-5 bi bi-chevron-down"></i>
+                </button>
+
+                <ul class=" w-100 shadow-sm dropdown-menu border-0 fs-5 fw-semibold">
+                    <li><a class="dropdown-item" href="#">Africa</a></li>
+                    <li><a class="dropdown-item" href="#">America</a></li>
+                    <li><a class="dropdown-item" href="#">Asia</a></li>
+                    <li><a class="dropdown-item" href="#">Europe</a></li>
+                    <li><a class="dropdown-item" href="#">Oceania</a></li>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+        </div>
+
+
+
+    <div class="container">
+        <div class="row px-5 px-sm-0  g-lg-5 g-4  ">
+            <a class="     col-lg-3 col-md-4   " href="">
+        <div class="card  " >
+            <img class="card-img-top img-fluid " src="flags/de.svg" alt="Germany" >
+            <div class="card-body fw-semibold">
+                <div class="card-title fs-5 fw-bold">Germany</div>
+                <div class="card-text">Population: <span class="text-muted">81,770,900</span></div>
+                <div class="">Region: <span class="text-muted">Europe</span></div>
+                <div class="">Capital: <span class="text-muted">Berlin</span></div>
+            </div>
+        </div>
+    </a>
+
+            <a class="   col-lg-3 col-md-4 " href="">
+            <div class="card  " >
+                <img class="card-img-top  " src="flags/us.svg" alt="United States of America" >
+                <div class="card-body fw-semibold ">
+                    <div class="card-title fs-5 fw-bold">United States of America</div>
+                    <div class="">Population: <span class="text-muted">323,947,000</span></div>
+                    <div class="">Region: <span class="text-muted">Americas</span></div>
+                    <div class="">Capital: <span class="text-muted">Washington,D.C.</span></div>
+                </div>
+            </div>
+        </a>
+
+
+
+
+            <a class="  col-lg-3 col-md-4" href="">
+            <div class="card " >
+                <img class="card-img-top" src="flags/br.svg" alt="Brazil" >
+                <div class="card-body fw-semibold">
+                    <div class="card-title fs-5 fw-bold">Brazil</div>
+                    <div class="">Population: <span class="text-muted">206,135,893</span></div>
+                    <div class="">Region: <span class="text-muted">Americas</span></div>
+                    <div class="">Capital: <span class="text-muted">Brasilia</span></div>
+                </div>
+            </div>
+        </a>
+
+
+
+            <a class="  col-lg-3 col-md-4" href="">
+            <div class="card " >
+                <img class="card-img-top" src="flags/is.svg" alt="Iceland" >
+                <div class="card-body fw-semibold">
+                    <div class="card-title fs-5 fw-bold">Iceland</div>
+                    <div class="">Population: <span class="text-muted">334,300</span></div>
+                    <div class="">Region: <span class="text-muted">Europe</span></div>
+                    <div class="">Capital: <span class="text-muted">Reykjavík</span></div>
+                </div>
+            </div>
+        </a>
+
+
+
+
+
+            <a class=" col-lg-3 col-md-4" href="">
+            <div class="card " >
+                <img class="card-img-top" src="flags/af.svg" alt="Afghanistan" >
+                <div class="card-body fw-semibold">
+                    <div class="card-title fs-5 fw-bold">Afghanistan</div>
+                    <div class="">Population: <span class="text-muted">27,657,145</span></div>
+                    <div class="">Region: <span class="text-muted">Asia</span></div>
+                    <div class="">Capital: <span class="text-muted">Kabul</span></div>
+                </div>
+            </div>
+        </a>
+
+
+
+
+            <a class=" col-lg-3 col-md-4" href="">
+            <div class="card " >
+                <img class="card-img-top" src="flags/ax.svg" alt="Aland Islands" >
+                <div class="card-body fw-semibold">
+                    <div class="card-title fs-5 fw-bold">Aland Islands</div>
+                    <div class="">Population: <span class="text-muted">28,875</span></div>
+                    <div class="">Region: <span class="text-muted">Europe</span></div>
+                    <div class="">Capital: <span class="text-muted">Mariehamn</span></div>
+                </div>
+            </div>
+        </a>
+
+
+
+
+        <a class=" col-lg-3 col-md-4" href="">
+            <div class="card " >
+                <img class="card-img-top" src="flags/al.svg" alt="Albania" >
+                <div class="card-body fw-semibold">
+                    <div class="card-title fs-5 fw-bold">Albania</div>
+                    <div class="">Population: <span class="text-muted">2,886,026</span></div>
+                    <div class="">Region: <span class="text-muted">Europe</span></div>
+                    <div class="">Capital: <span class="text-muted">Tirana</span></div>
+                </div>
+            </div>
+        </a>
+
+            <a class=" col-lg-3 col-md-4" href="">
+            <div class="card " >
+                <img class="card-img-top" src="flags/dz.svg" alt="Algeria" >
+                <div class="card-body fw-semibold">
+                    <div class="card-title fs-5 fw-bold">Algeria</div>
+                    <div class="">Population: <span class="text-muted">40,400,000</span></div>
+                    <div class="">Region: <span class="text-muted">Africa</span></div>
+                    <div class="">Capital: <span class="text-muted">Algiers</span></div>
+                </div>
+            </div>
+        </a>
+
+        </div>
+
+
+
+    </div>
+   <footer class="p-5 ">
+
+   </footer>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+</body>
+</html>
