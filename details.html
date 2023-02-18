@@ -31,9 +31,10 @@
 
 
 
+
     </style>
 </head>
-<body>
+<body >
 <header class=" shadow-sm bg-white   ">
     <div class="container d-flex flex--sm-wrap  ">
         <span class="me-auto fw-bold py-4 h3"  >
@@ -50,13 +51,13 @@
 </header>
 <main>
     <div class="container">
-        <a href="index.html">
-        <button type="button" class="btn my-5 px-5 shadow bg-white fw-semibold"><i class="bi bi-arrow-left pe-2"></i>Back</button>
-        </a>
+
+        <a href="index.html" class="btn my-5 px-5 shadow bg-white fw-semibold"><i class="bi bi-arrow-left pe-2"></i>Back</a>
+
     </div>
     <div class="container ">
         <div class="row justify-content-between">
-            <div class="col-lg-5"><img class="img-fluid  " src="flags/de.svg"  alt="Germany"></div>
+            <div id="flag" class="col-lg-5"><img class="img-fluid  " src="flags/de.svg"  alt="Germany"></div>
             <div class="col-lg-6 py-4 h-75">
                 <div class="fs-2   fw-bold ">Germany</div>
                  <div class="fs-6 fw-semibold row ">
@@ -99,9 +100,11 @@
     </div>
 
 </main>
-<footer class="p-5 ">
+<div class="p-5 ">
 
-</footer>
-
+</div>
+<script type="module" src="detailsScript.js">
+alert(countryId);
+</script>
 </body>
 </html>
