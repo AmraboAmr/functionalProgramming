@@ -1,0 +1,12 @@
+.dark-mode-d {
+    background-color: #111517;
+    color: white;
+}
+.dark-mode-l {
+    background-color: rgba(6,0,5,0.73);
+    color: white;
+}
+.shadow-white{
+    box-shadow: 0px 1px 7px 0px white;
+}
+

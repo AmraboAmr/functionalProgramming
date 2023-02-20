@@ -7,7 +7,8 @@ function getDetails(data) {
 
 
 
-
+currencies="";
+languages="";
 
 console.log(data);
         name = data.name.common;
@@ -22,13 +23,22 @@ console.log(data);
 
     native=data.name.nativeName[Object.keys(data.name.nativeName)[0]].official;
 
+for(let cc =0;cc<Object.keys(data.currencies).length;cc++){
+    if(cc==0) currencies+= data.currencies[Object.keys(data.currencies)[cc]].name;
+   else currencies+=" , "+data.currencies[Object.keys(data.currencies)[cc]].name;
+}
+    for(let cc =0;cc<Object.keys(data.languages).length;cc++){
+        if(cc==0)languages+=data.languages[Object.keys(data.languages)[cc]];
+
+       else languages+=" , "+data.languages[Object.keys(data.languages)[cc]];
+    }
 
     subRegion=data.subregion;
 tld=data.tld[0];
 
         details.innerHTML += `
     <div id="flag" class="col-lg-5">
-    <img class="img-fluid  " src="${flag}"  alt="${name}"></div>
+    <img  src="${flag}"  alt="${name}"></div>
             <div class="col-lg-6 py-4 h-75">
                 <div class="fs-2   fw-bold ">${name}</div>
                 <div class="fs-6 fw-semibold row ">
@@ -48,8 +58,8 @@ tld=data.tld[0];
 
                         <div class="">Top Level Domain: <span class="text-muted">${tld}</span></div>
 
-                        <div class="">Currencies: <span class="text-muted">Euro</span></div>
-                        <div class="">Languages: <span class="text-muted">German,Serbian,North Frisian</span></div>
+                        <div class="">Currencies: <span class="text-muted">${currencies}</span></div>
+                        <div class="">Languages: <span class="text-muted">${languages}</span></div>
 
 
                     </div>
