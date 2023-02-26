@@ -2,7 +2,9 @@ let details=document.getElementById("details");
 let darkMode=document.getElementById("darkMode");
 let isDarkMode = localStorage.getItem("dark-mode");
 let body = document.body;
-let countryId = window.location.search.split('id=')[1];
+//let countryId = window.location.search.split('id=')[1];
+let url=new URLSearchParams(window.location.search);
+let countryId=url.get('id');
 function enableDark() {
 
     body = document.body;
@@ -38,7 +40,7 @@ function getDetails(data) {
 currencies="";
 languages="";
 
-console.log(data);
+
         name = data.name.common;
         population = data.population;
         region = data.region;
@@ -61,6 +63,7 @@ for(let cc =0;cc<Object.keys(data.currencies).length;cc++){
        else languages+=" , "+data.languages[Object.keys(data.languages)[cc]];
     }
 
+
     subRegion=data.subregion;
 tld=data.tld[0];
     if(isDarkMode=="yes"){
@@ -75,7 +78,7 @@ tld=data.tld[0];
 
 
                         <div class="">Native Name: <span class="feature-value text-white-50">${native}</span></div>
-                        <div class="">Population: <span class="feature-value text-white-50">${population}</span></div>
+                        <div class="">Population: <span class="feature-value text-white-50">${population.toLocaleString()}</span></div>
                         <div class="">Region: <span class="feature-value text-white-50">${region}</span></div>
                         <div class="">Sub Region: <span class=" feature-value text-white-50">${subRegion}</span></div>
                         <div class="">Capital: <span class="feature-value text-white-50">${capital}</span></div>
@@ -94,10 +97,10 @@ tld=data.tld[0];
                 </div>
                 <div class="row justify-content-start g-3 mt-4" >
         <div  class="fw-semibold col-lg-auto mt-4 ">Border Countries: </div>
-        <div class="col-auto ">
-            <button class="btn shadow-white bg-black text-white px-4 me-1" type="button">France</button>
-            <button class="btn shadow-white bg-black text-white px-4 me-1" type="button">Poland</button>
-            <button class="btn shadow-white bg-black text-white px-4 me-1" type="button">Netherlands</button></div>
+        <div  class="col-auto ">
+            <button class="btn shadow-white bg-black text-color px-4 me-1" type="button">France</button>
+            <button class="btn shadow-white bg-black text-color px-4 me-1" type="button">Poland</button>
+            <button class="btn shadow-white bg-black text-color px-4 me-1" type="button">Netherlands</button></div>
 
 
     </div>
@@ -118,7 +121,7 @@ else
 
 
                         <div class="">Native Name: <span class="feature-value text-muted">${native}</span></div>
-                        <div class="">Population: <span class="feature-value text-muted">${population}</span></div>
+                        <div class="">Population: <span class="feature-value text-muted">${population.toLocaleString()}</span></div>
                         <div class="">Region: <span class="feature-value text-muted">${region}</span></div>
                         <div class="">Sub Region: <span class=" feature-value text-muted">${subRegion}</span></div>
                         <div class="">Capital: <span class="feature-value text-muted">${capital}</span></div>
@@ -137,10 +140,8 @@ else
                 </div>
                 <div class="row justify-content-start g-3 mt-4" >
         <div  class="fw-semibold col-lg-auto mt-4 ">Border Countries: </div>
-        <div class="col-auto ">
-            <button class="btn shadow-sm bg-white px-4 me-1" type="button">France</button>
-            <button class="btn shadow-sm bg-white px-4 me-1" type="button">Poland</button>
-            <button class="btn shadow-sm bg-white px-4 me-1" type="button">Netherlands</button></div>
+        <div id="borders" class="col-auto ">
+          
 
 
     </div>
@@ -149,6 +150,7 @@ else
                 
 `;
     }
+getBorders(data);
 
 
 
@@ -156,9 +158,35 @@ else
 
 
 }
+function getBorders(country){
+    let bordersDiv=document.getElementById("borders");
+    let allRequests=[];
+    bordersDiv.innerHTML=``;
+    if(country.borders){
+        for(let b of country.borders){
+            allRequests.push( fetch(`https://restcountries.com/v3.1/alpha/${b}`)
+                .then ((response)=> response.json()));
+
+
+        }
+        const allData = Promise.all(allRequests);
+        allData.then((res) => {
+
+            for(let border of res){
+                bordersDiv.innerHTML+=` <button class="btn shadow-sm main-bg px-4 me-1" type="button">${border[0].name.common }</button>`;
+            }
+        });
+
+    }
+
+
+
+
+}
+
 
 function getCountries(){
-    let url=`https://restcountries.com/v3.1/name/${countryId}`;
+    let url=`https://restcountries.com/v3.1/alpha/${countryId}`;
     fetch(url)
         .then ((response)=> response.json())
         .then((data)=>{

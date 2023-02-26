@@ -1,4 +1,4 @@
-.dark-mode-d {
+.dark-mode {
     background-color: #111517;
     color: white;
 }
@@ -9,4 +9,22 @@
 .shadow-white{
     box-shadow: 0px 1px 7px 0px white;
 }
+:root {
+    --main-bg-color: #fafafa;
+    --element-bg-color:white;
+    --text-color:black;
+
+}
+.element-bg{
+    background-color: var(--element-bg-color);
+}
+.main-bg{
+    background-color: var(--main-bg-color);
+}
+.text-color{
+    color:var(--text-color) ;
+}
+
+
+
 
