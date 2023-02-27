@@ -133,20 +133,5 @@ function getCountries(){
 
 }
 getCountries();
-darkMode.addEventListener("click",()=>{
-            if(isDarkMode=="yes") {
-                localStorage.setItem("dark-mode", "no");
 
-            }
-            else {
-                localStorage.setItem("dark-mode", "yes");
 
-    }
-
-    enableDark();
-
-});
-
-if(isDarkMode=="yes"){
-    enableDark();
-}

@@ -13,6 +13,7 @@
     --main-bg-color: #fafafa;
     --element-bg-color:white;
     --text-color:black;
+    --shadow:33,37,41,0.075;
 
 }
 .element-bg{
@@ -24,7 +25,10 @@
 .text-color{
     color:var(--text-color) ;
 }
-
+.dropdown-menu{
+    --bs-dropdown-bg:var(--element-bg-color);
+    background-color: var(--element-bg-color);
+}
 
 
 

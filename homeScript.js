@@ -7,7 +7,7 @@ let isDarkMode = localStorage.getItem("dark-mode");
 let countries=[];
 const NO_FILTER ="No Filter";
 let activeRequest =0;
-let dropdownMenus=document.getElementsByClassName('card');
+let dropdownMenus=document.getElementsByClassName('dropdown-menu');
 
 
 let r = document.querySelector(':root');
@@ -137,6 +137,7 @@ function enableLight(r) {
     r.style.setProperty('--main-bg-color', '#fafafa');
     r.style.setProperty('--element-bg-color', '#ffffff');
     r.style.setProperty('--text-color', 'black');
+    r.style.setProperty('--shadow', '33,37,41,0.075');
 
 
 }
@@ -146,10 +147,14 @@ function enableDark(root) {
     root.style.setProperty('--main-bg-color', '#202c37');
     root.style.setProperty('--element-bg-color', '#2b3945');
     root.style.setProperty('--text-color', 'white');
+    root.style.setProperty('--shadow', '17,18,45,0.02');
+
 }
 searchInput.addEventListener("keyup",onSearch);
 searchBtn.addEventListener("click",onSearch);
 darkMode.addEventListener("click",()=>{
+    isDarkMode = localStorage.getItem("dark-mode");
+    console.log(isDarkMode);
     if(isDarkMode=="yes") {
         localStorage.setItem("dark-mode", "no");
           enableLight(r);
