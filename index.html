@@ -32,14 +32,16 @@
         }
 
 
-
+        .g-5, .gx-5 {
+            --bs-gutter-x: 4rem;
+        }
 
 a{
     color: black;
     text-decoration: none;
 }
 img{
-    height: 10rem;
+    height: 9rem;
     object-fit: cover;
 }
         @media only screen and (max-width: 767px) {
@@ -55,8 +57,8 @@ img{
 </head>
 <body class="main-bg">
 <header id="hdr" class=" shadow-sm  element-bg  ">
-    <div class="container d-flex flex--sm-wrap  ">
-        <span  class="me-auto fw-bold py-4 h3"  >
+    <div class="container text-color d-flex flex--sm-wrap  ">
+        <span  class="me-auto  fw-bold py-4 h3"  >
        Where in the world?
    </span   >
         <span id="darkMode" class="fs-5 my-4  border-0 fw-semibold" >
@@ -74,7 +76,7 @@ img{
     <div class="container " >
 <div class="row justify-content-between my-sm-5  ">
         <div  class="  col-sm-5 my-sm-0 mt-4   position-relative  ">
-            <div id="inputGroup" class="rounded input-group shadow-sm element-bg">
+            <div id="inputGroup" class="rounded h-100 input-group shadow-sm element-bg">
                 <button  class="btn  border-0 m-0 ps-4" id="searchButton">  <i  id="search" class="bi bi-search  "></i> </button>
 
                 <input id="searchInput" type="text" class="form-control border-0 ps-3 fs-6  " placeholder="Search for a country.." aria-label="Search for a country.." aria-describedby="searchButton"></div>
@@ -82,16 +84,16 @@ img{
         </div>
         <div class=" col-sm-auto col-8 my-sm-0 my-5  ">
             <div id="dropD" class=" shadow-sm dropdown element-bg fs-6 rounded   ">
-                <button id="dropBtn"  class="w-100 btn btn-white  fw-semibold border-0 m-0 p-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="row justify-content-between ">
+                <button id="dropBtn"  class="w-100 btn element-bg  fw-semibold border-0 m-0 p-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="row justify-content-between text-color ">
 
-                            <div class="col-9 text-start" id="dropDown"> Filter by Region</div>
+                            <div class="col-9 text-start " id="dropDown"> Filter by Region</div>
                         <span class="col text-end"> <i class="ms-2 ps- bi bi-chevron-down"></i> </span>
                     </span>
 
                 </button>
 
-                <ul  class=" w-100 shadow-sm dropdown-menu border-0  fw-semibold">
+                <ul  class="element-bg w-100 shadow-sm dropdown-menu border-0   fw-semibold">
                     <li onclick="onFilterChange('No Filter',filterCountries)"><a class="dropdown-item" href="#">No Filter</a></li>
                     <li onclick="onFilterChange('Africa',filterCountries)"><a class="dropdown-item" href="#">Africa</a></li>
                     <li onclick="onFilterChange('Americas',filterCountries)"><a class="dropdown-item" href="#">America</a></li>
@@ -109,7 +111,7 @@ img{
 
 
     <div class="container">
-        <div onload="getCountries()" id="countries" class="row px-5 px-sm-0  g-xl-5 g-4   ">
+        <div onload="getCountries()" id="countries" class="row px-5 px-sm-0  g-xl-5 g-5   ">
 
 
 

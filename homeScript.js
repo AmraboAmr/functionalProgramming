@@ -7,23 +7,15 @@ let isDarkMode = localStorage.getItem("dark-mode");
 let countries=[];
 const NO_FILTER ="No Filter";
 let activeRequest =0;
+let dropdownMenus=document.getElementsByClassName('card');
 
 
 let r = document.querySelector(':root');
 getAllCountries();
 
-
-if(isDarkMode=="yes"){
-    enableDark(r);
-}
+isDarkMode=="yes"? enableDark(r):   enableLight(r);
 
 
-function enableDark(root) {
-    root.style.setProperty('--main-bg-color', '#202c37');
-    root.style.setProperty('--element-bg-color', '#2b3945');
-    root.style.setProperty('--text-color', 'white');
-
-}
 
  function  loadCountries(url,render) {
     activeRequest++;
@@ -78,13 +70,13 @@ function clear(){
 
 function showCard( code, flag, name, population, capital,region) {
     countriesCard.innerHTML += `  <a   class=" country col-xl-3 col-md-4   " href="details.html?id=${code}">
-        <div class="card border-0 element-bg shadow-sm  h-100  " >
+        <div class="rounded border-0 element-bg shadow-sm  h-100  " style="overflow: hidden;">
             <img class="card-img-top  " src="${flag}" alt="${name}" >
-            <div class="text-color  card-body fw-semibold mb-4">
+            <div class="text-color pt-3 pb-4 ps-3   fw-semibold mb-4">
                 <div class="card-title fs-5 fw-bold">${name}</div>
-                <div class="card-text">Population: <span class=" feature-value text-muted">${population.toLocaleString()}</span></div>
-                <div class="card-text">Region: <span class=" feature-value text-muted">${region}</span></div>
-                <div class="card-text">Capital: <span class=" feature-value text-muted">${capital}</span></div>
+                <div class=" fw-semibold">Population: <span class=" fw-light feature-value color-text">${population.toLocaleString()}</span></div>
+                <div class=" fw-semibold">Region: <span class=" feature-value fw-light">${region}</span></div>
+                <div class="fw-semibold ">Capital: <span class=" feature-value fw-light">${capital}</span></div>
             </div>
         </div>
     </a>`;
@@ -139,19 +131,33 @@ function onSearch(){
 }
 
 
+
+
+function enableLight(r) {
+    r.style.setProperty('--main-bg-color', '#fafafa');
+    r.style.setProperty('--element-bg-color', '#ffffff');
+    r.style.setProperty('--text-color', 'black');
+
+
+}
+
+function enableDark(root) {
+
+    root.style.setProperty('--main-bg-color', '#202c37');
+    root.style.setProperty('--element-bg-color', '#2b3945');
+    root.style.setProperty('--text-color', 'white');
+}
 searchInput.addEventListener("keyup",onSearch);
 searchBtn.addEventListener("click",onSearch);
 darkMode.addEventListener("click",()=>{
-   if(isDarkMode=="yes") {
-       localStorage.setItem("dark-mode", "no");
-
-   }
-   else {
-       localStorage.setItem("dark-mode", "yes");
-
-   }
-
-    enableDark(r);
+    if(isDarkMode=="yes") {
+        localStorage.setItem("dark-mode", "no");
+          enableLight(r);
+    }
+    else {
+        localStorage.setItem("dark-mode", "yes");
+        enableDark(r);
+    }
 
 });
 
