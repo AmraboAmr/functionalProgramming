@@ -1,75 +1,116 @@
-let searchBtn=document.getElementById("searchButton");
-let searchInput=document.getElementById("searchInput");
-let countriesCard = document.getElementById("countries");
-let dropDownBtn=document.getElementById("dropDown");
-let darkMode=document.getElementById("darkMode");
-let isDarkMode = localStorage.getItem("dark-mode");
-let countries=[];
-const NO_FILTER ="No Filter";
-let activeRequest =0;
-let dropdownMenus=document.getElementsByClassName('dropdown-menu');
-
-
-let r = document.querySelector(':root');
-getAllCountries();
-
-isDarkMode=="yes"? enableDark(r):   enableLight(r);
 
 
 
- function  loadCountries(url,render) {
-    activeRequest++;
-    let requestNumber=activeRequest;
-    countries=[];
-    fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-if(activeRequest==requestNumber) {
-    for (let i = 0; i < data.length; i++) {
-        countries[i] = data[i];
-    }
+let activeRequest = 0;
 
-    render(countries);
-}
+async function init() {
+    let darkMode = document.getElementById("darkMode");
+    let isDarkMode = localStorage.getItem("dark-mode");
+    let r = document.querySelector(':root');
 
-        });
+    let countries = [];
+    let filter = "No Filter";
 
 
-}
+    darkMode.addEventListener("click", () => {
+        isDarkMode = getFromLocalStorage("dark-mode");
 
-function filterCountries(countries,filter){
-    dropDownBtn.innerHTML=filter;
-    let filteredCountries=[];
-
-    if(filter==NO_FILTER)render(countries);
-    else{
-        let index=0;
-        for(let c =0;c<countries.length;c++){
-            if(countries[c].region ==filter){
-                filteredCountries[index++]=countries[c];
-
-
-            }
+        if (isDarkMode == "yes") {
+            setInLocalStorage("dark-mode", "no");
+            enableLight(r);
+        } else {
+            setInLocalStorage("dark-mode", "yes");
+            enableDark(r);
         }
-        render(filteredCountries);
-    }
+
+
+    });
+    onSearch(async (searchValue) => {
+
+        countries = await loadCountries(searchValue);
+        render(filterCountries(countries, filter));
+
+    });
+    onFilterChange(async (selectedFilter) => {
+         filter=selectedFilter;
+
+        render(filterCountries(countries, filter));
+
+    });
+
+
+    countries = await loadCountries();
+    filterCountries(countries, filter);
+    render(filterCountries(countries, filter));
+
+    isDarkMode == "yes" ? enableDark(r) : enableLight(r);
+
 }
 
-function onFilterChange(value,filterCountries){
-    filterCountries(countries,value);
+function onSearch(callBack) {
+
+
+    document.getElementById('searchInput').addEventListener("keyup", async (event) => {
+        // do something for debouncing
+
+        callBack(event.target.value);
+
+        // when we call the callback func, we return the logic to execute in the caller context
+    });
+
+
+}
+function onFilterChange(callBack) {
+   let items= document.getElementsByClassName('dropdown-item');
+
+   for(let item of items){
+       item.addEventListener("click",async (event) => {
+           // do something for debouncing
+
+           callBack(event.target.textContent);
+
+           // when we call the callback func, we return the logic to execute in the caller context
+       } );
+   }
+
+
+
 
 }
 
 
 
 
-function clear(){
-    countriesCard.innerHTML="";
+
+
+
+
+function loadCountries(value) {
+
+    let url = '';
+    value ? url = `https://restcountries.com/v3.1/name/${value}` : url = `https://restcountries.com/v3.1/all`;
+    return fetch(url)
+        .then((response) => response.json());
+
 
 }
 
-function showCard( code, flag, name, population, capital,region) {
-    countriesCard.innerHTML += `  <a   class=" country col-xl-3 col-md-4   " href="details.html?id=${code}">
+
+function render(countries) {
+    let countriesCard = document.getElementById("countries");
+    countriesCard.innerHTML = "";
+
+    let name, population, capital, flag, code, region;
+
+
+    for (let c of countries) {
+        name = c.name.common;
+        population = c.population;
+        capital = c.capital;
+        flag = c.flags.svg;
+        code = c.cca3;
+        region = c.region;
+        countriesCard.innerHTML += `  <a   class=" country col-xl-3 col-md-4   " href="details.html?id=${code}">
         <div class="rounded border-0 element-bg shadow-sm  h-100  " style="overflow: hidden;">
             <img class="card-img-top  " src="${flag}" alt="${name}" >
             <div class="text-color pt-3 pb-4 ps-3   fw-semibold mb-4">
@@ -80,24 +121,6 @@ function showCard( code, flag, name, population, capital,region) {
             </div>
         </div>
     </a>`;
-}
-
-function render(countries) {
-    clear();
-
-    let name, population,  capital, flag,code,region;
-
-
-    for(let c of countries){
-
-
-        name = c.name.common;
-        population = c.population;
-        capital = c.capital;
-        flag = c.flags.svg;
-        code=c.cca3;
-        region=c.region;
-        showCard( code, flag, name, population, capital,region);
 
 
     }
@@ -105,31 +128,25 @@ function render(countries) {
 
 }
 
-function getAllCountries(){
-    let url=`https://restcountries.com/v3.1/all`;
 
-   loadCountries(url,render);
+function filterCountries(countries, filter) {
+    document.getElementById("dropDown").innerHTML = filter;
+    let filteredCountries = [];
+
+    if (filter == 'No Filter') return (countries);
+    else {
+        let index = 0;
+        for (let c = 0; c < countries.length; c++) {
+            if (countries[c].region == filter) {
+                filteredCountries[index++] = countries[c];
 
 
+            }
+        }
+
+        return filteredCountries;
+    }
 }
-
-function onSearch(){
-    //i=0;
-   let searchValue=searchInput.value;
-   if(searchValue==""){
-
-       getAllCountries();
-
-   }
-   else{
-       let url=`https://restcountries.com/v3.1/name/${searchValue}`;
-       loadCountries(url,render);
-   }
-
-
-
-}
-
 
 
 
@@ -150,20 +167,23 @@ function enableDark(root) {
     root.style.setProperty('--shadow', '17,18,45,0.02');
 
 }
-searchInput.addEventListener("keyup",onSearch);
-searchBtn.addEventListener("click",onSearch);
-darkMode.addEventListener("click",()=>{
-    isDarkMode = localStorage.getItem("dark-mode");
-    console.log(isDarkMode);
-    if(isDarkMode=="yes") {
-        localStorage.setItem("dark-mode", "no");
-          enableLight(r);
+let setInLocalStorage = function (key, value) {
+    try {
+        localStorage.setItem(key, JSON.stringify(value));
     }
-    else {
-        localStorage.setItem("dark-mode", "yes");
-        enableDark(r);
+    catch {
+        // handle error, usually to keep it in memory (variable)
     }
+}
 
-});
+let getFromLocalStorage = function (key) {
+    try {
+        return JSON.parse(localStorage.getItem(key));
+    }
+    catch {
+        return undefined; // or load from memory/variable
+    }
+}
 
+init();
 
