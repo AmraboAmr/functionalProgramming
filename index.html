@@ -5,29 +5,42 @@
     <meta charset="UTF-8">
     <title>Flags</title>
     <link rel="stylesheet" href="DarkMode.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap" rel="stylesheet">
 
     <style>
-        body{
+        ::placeholder {
+            color: var(--text-color);
+        }
+
+        .form-control {
+            --bs-form-control-bg: var(--element-bg-color);
+            background-color: var(--element-bg-color);
+            color: var(--text-color);
+        }
+
+        body {
             font-family: 'Nunito Sans', sans-serif;
         }
 
-        #search{
+        #search {
             color: darkgray;
         }
 
 
-        #dropDown{
+        #dropDown {
             width: 140px;
         }
-        #darkMode{
+
+        #darkMode {
             cursor: pointer;
         }
-        header{
+
+        header {
             background-color: var(--element-bg-color);
         }
 
@@ -35,33 +48,60 @@
         .g-5, .gx-5 {
             --bs-gutter-x: 4rem;
         }
-        .dropdown-menu{
-            --bs-dropdown-bg:var(--element-bg-color);
+
+        .dropdown-menu {
+            --bs-dropdown-bg: var(--element-bg-color);
             background-color: var(--element-bg-color);
         }
-        .dropdown-item{
+
+        .dropdown-item {
             color: var(--text-color);
         }
+
         .shadow-sm {
-            box-shadow: 0 0.125rem 0.25rem rgba(var(--shadow))!important;
+            box-shadow: 0 0.125rem 0.25rem rgba(var(--shadow)) !important;
+        }
+
+        .fs-7 {
+            font-size: 0.8rem !important;
+        }
+
+        .fs-5 {
+            font-size: 1.2rem !important;
         }
 
 
+        a {
+            color: black;
+            text-decoration: none;
+        }
 
-a{
-    color: black;
-    text-decoration: none;
-}
-img{
-    height: 9rem;
-    object-fit: cover;
-}
+        img {
+            height: 9rem;
+            object-fit: cover;
+        }
+
         @media only screen and (max-width: 767px) {
-            img{
+            img {
                 height: 18rem;
 
 
             }
+        }
+
+        .removeFav{
+            cursor: pointer;
+        }
+
+        .hovered {
+            border: 2px #27ae60 dashed;
+        }
+        #favList{
+            min-height: 660px;
+        }
+        .fav-img{
+            width: 2rem;
+            height: 20px;
         }
 
 
@@ -70,11 +110,11 @@ img{
 <body class="main-bg">
 <header id="hdr" class=" shadow-sm  element-bg  ">
     <div class="container text-color d-flex flex--sm-wrap  ">
-        <span  class="me-auto  fw-bold py-4 h3"  >
+        <span class="me-auto  fw-bold py-4 h4">
        Where in the world?
-   </span   >
-        <span id="darkMode" class="fs-5 my-4  border-0 fw-semibold" >
-        <i  class="bi bi-moon me-1 mb-1"></i>
+   </span>
+        <span id="darkMode" class="fs-5 my-4  border-0 fw-semibold">
+        <i class="bi bi-moon me-1 mb-1"></i>
 
        <span id="darkText"> Dark Mode</span>
     </span>
@@ -83,60 +123,85 @@ img{
 
 </header>
 
-<main >
+<main>
 
-    <div class="container " >
-<div class="row justify-content-between my-sm-5  ">
-        <div  class="  col-sm-5 my-sm-0 mt-4   position-relative  ">
-            <div id="inputGroup" class="rounded h-100 input-group shadow-sm element-bg">
-                <button  class="btn  border-0 m-0 ps-4" id="searchButton">  <i  id="search" class="bi bi-search  "></i> </button>
+    <div class="container ">
+        <div class="row justify-content-between my-sm-5  ">
+            <div class="  col-sm-5 my-sm-0 mt-4   position-relative  ">
+                <div id="inputGroup" class="rounded h-100 input-group shadow-sm element-bg">
+                    <button class="btn  border-0 m-0 ps-4" id="searchButton"><i id="search" class="bi bi-search  "></i>
+                    </button>
 
-                <input id="searchInput" type="text" class="form-control border-0 ps-3 fs-6  " placeholder="Search for a country.." aria-label="Search for a country.." aria-describedby="searchButton"></div>
+                    <input id="searchInput" type="text" class="form-control text-color element-bg border-0 ps-3 fs-6  "
+                           placeholder="Search for a country.." aria-label="Search for a country.."
+                           aria-describedby="searchButton"></div>
 
-        </div>
-        <div class=" col-sm-auto col-8 my-sm-0 my-5  ">
-            <div id="dropD" class=" shadow-sm dropdown element-bg fs-6 rounded   ">
-                <button id="dropBtn"  class="w-100 btn element-bg  fw-semibold border-0 m-0 p-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            </div>
+            <div class=" col-sm-auto col-8 my-sm-0 my-5  ">
+                <div id="dropD" class=" shadow-sm dropdown element-bg fs-5 rounded   ">
+                    <button id="dropBtn" class="w-100 btn element-bg  fw-semibold border-0 m-0 p-3" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="row justify-content-between text-color ">
 
-                            <div class="col-9 text-start " id="dropDown"> Filter by Region</div>
+                            <div class="col-9 text-start fs-5 " id="dropDown"> Filter by </div>
                         <span class="col text-end"> <i class="ms-2 ps- bi bi-chevron-down"></i> </span>
                     </span>
 
-                </button>
+                    </button>
 
-                <ul   class="element-bg w-100 shadow-sm dropdown-menu border-0   fw-semibold">
-                    <li><a class="dropdown-item" href="#">No Filter</a></li>
-                    <li><a class="dropdown-item" href="#">Africa</a></li>
-                    <li><a class="dropdown-item" href="#">Americas</a></li>
-                    <li><a class="dropdown-item" href="#">Asia</a></li>
-                    <li><a class="dropdown-item" href="#">Europe</a></li>
-                    <li><a class="dropdown-item" href="#">Oceania</a></li>
-                </ul>
+                    <ul class="element-bg w-100 shadow-sm dropdown-menu border-0 fs-5   fw-semibold">
+                        <li><a class="dropdown-item" href="#">Favourites</a></li>
+                        <li><a class="dropdown-item" href="#">No Filter</a></li>
+                        <li><a class="dropdown-item" href="#">Africa</a></li>
+                        <li><a class="dropdown-item" href="#">Americas</a></li>
+                        <li><a class="dropdown-item" href="#">Asia</a></li>
+                        <li><a class="dropdown-item" href="#">Europe</a></li>
+                        <li><a class="dropdown-item" href="#">Oceania</a></li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div style="overflow: hidden;" class="container ">
+        <div class="row justify-content-between gx-4 ">
+            <div class=" col-3 px-3 ">
+                <div id="favList" class="shadow-sm element-bg rounded" >
+
+                    <div class="p-3">
+                        <div class="fs-5  text-color  fw-bold"> Favourites</div>
+                        <div id="favItems">
+
+
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
 
+            <div class="col-9">
 
+                <div id="countries" class="row px-5 px-sm-0  g-5   ">
+
+
+                </div>
+            </div>
         </div>
-    </div>
-        </div>
-
-
-
-    <div class="container">
-        <div onload="getCountries()" id="countries" class="row px-5 px-sm-0  g-xl-5 g-5   ">
-
-
-
-        </div>
-
 
 
     </div>
-   <div class="p-5 ">
+    <div class="p-5 ">
 
-   </div>
+    </div>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-<script type="text/javascript" src="homeScript.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+<script type="module" src="homeScript.js"></script>
+
 </body>
 </html>

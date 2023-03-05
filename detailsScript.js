@@ -119,7 +119,7 @@ function getBorders(country){
 }
 
 
-function getCountries(){
+function getCountry(){
     let url=`https://restcountries.com/v3.1/alpha/${countryId}`;
     fetch(url)
         .then ((response)=> response.json())
@@ -132,6 +132,6 @@ function getCountries(){
 
 
 }
-getCountries();
+getCountry();
 
 
