@@ -1,134 +1,89 @@
 import {
-    addDragEvent, addFav, enableDark,
+    enableDark,
     enableLight,
-    filterCountries,
-    loadCountries, loadCountriesByCode, onCountryDrop,
-    onFilterChange, onRemoveFav, removeFav,
-    render,
-    setInLocalStorage, showFavCountries,onSearch,getFromLocalStorage
+    loadCountries,
+    onRemoveFav
+    , addStarListener, darkModeListener
 } from "./functionality.js";
+import {getFromLocalStorage, setInLocalStorage} from "./LocalStorage.js";
+import {onFilterChange, onSearch, renderCountries, onFavDrop, renderFavCountries} from "./rendering.js";
+import {FAV_KEY} from "./constans.js"
+import {addFav, removeFav} from "./favorites.js";
+import {filterCountries} from "./countries.js";
 
-let activeRequest = 0;
-let loading = true;
+let countries = [];
+let favorites = getFromLocalStorage(FAV_KEY) || [];
+
+function removeFavHandler(countryCode) {
+    let unFav = countries.find((country) => country.cca3 === countryCode);
+    favorites = removeFav(favorites, unFav);
+    favouritesUpdateHandler();
 
 
+}
+
+function favouritesUpdateHandler() {
+    setInLocalStorage(FAV_KEY, favorites)
+    renderFavCountries(favorites, removeFavHandler);
+}
+
+function addFavHandler(countryCode) {
+    let draggedCountry = countries.find((country) => country.cca3 === countryCode);
+    favorites = addFav(favorites, draggedCountry);
+    favouritesUpdateHandler();
+
+}
 
 async function init() {
-    let draggedCountry;
-    let darkMode = document.getElementById("darkMode");
-    let isDarkMode = getFromLocalStorage("dark-mode");
-    let r = document.querySelector(":root");
 
 
-    let countries = [];
-    let filter = "No Filter";
-    const FAV = 'fav';
-    let favorites = getFromLocalStorage(FAV);
-    if (!favorites || !Object.keys(favorites).length) favorites = [];
-    console.log(favorites);
-    let favCountries = [];
+    let filter = "";
 
 
-    darkMode.addEventListener("click", () => {
-        isDarkMode = getFromLocalStorage("dark-mode");
-
-        if (isDarkMode == "yes") {
-            setInLocalStorage("dark-mode", "no");
-            enableLight(r);
-        } else {
-            setInLocalStorage("dark-mode", "yes");
-            enableDark(r);
-        }
+    darkModeListener(getFromLocalStorage, enableDark, enableLight, setInLocalStorage);
 
 
-    });
-   onSearch(async (searchValue) => {
+    onSearch(async (searchValue) => {
 
         countries = await loadCountries(searchValue);
-        render(filterCountries(countries, filter), () => {
-
-            addDragEvent((code) => {
-                draggedCountry = code;
-
-            });
-
-
-        });
+        renderCountries(filterCountries(countries, filter));
     });
 
     onFilterChange(async (selectedFilter) => {
         filter = selectedFilter;
-        console.log(filter);
-        if (filter == 'Favourites') {
-            favCountries=await loadCountriesByCode(favorites);
+        let favCountriesCodes = favorites.map((fav) => fav.cca3);
 
-            render(favCountries, () => {
+        renderCountries(filterCountries(countries, filter, favCountriesCodes));
 
-
-                addDragEvent((code) => {
-                    draggedCountry = code;
-
-
-                });
-
-
-            });
-        } else {
-
-
-            render(filterCountries(countries, filter), () => {
-
-                addDragEvent((code) => {
-                    draggedCountry = code;
-
-
-                });
-
-
-            });
-        }
     });
 
 
     countries = await loadCountries();
-    if (countries) loading = true;
-    filterCountries(countries, filter);
-    render(filterCountries(countries, filter), () => {
+    renderCountries(filterCountries(countries, filter));
 
-        addDragEvent((code) => {
-            draggedCountry = code;
+    addStarListener((country) => {
+            favorites = addFav(favorites, country, setInLocalStorage, FAV_KEY);
+        }, (country) => {
+            favorites = removeFav(favorites, country, setInLocalStorage, FAV_KEY);
+        }
+    );
 
-        });
+    onFavDrop(async (droppedCountryCode) => {
+        let alreadyFavCode = favorites.find((country) => country.cca3 === droppedCountryCode);
+        if (!alreadyFavCode) {
+            addFavHandler(droppedCountryCode);
 
-    });
-    isDarkMode == 'yes' ? enableDark(r) : enableLight(r);
-
-
-    onCountryDrop(async () => {
-
-
-        favorites = addFav(favorites, draggedCountry, setInLocalStorage, FAV);
-        favCountries = await loadCountriesByCode(favorites)
-        showFavCountries(favCountries);
-        onRemoveFav(async (country) => {
-            favorites = removeFav(favorites, country, setInLocalStorage, FAV);
-
-        });
+        }
     });
 
 
-    favCountries = await loadCountriesByCode(favorites);
-    showFavCountries(favCountries);
-    onRemoveFav(async (country) => {
-        favorites = removeFav(favorites, country, setInLocalStorage, FAV);
-
-
-    });
+    renderFavCountries(favorites, removeFavHandler);
 
 }
 
 
-init().then(r =>{} );
+init().then(() => {
+});
 
 
 

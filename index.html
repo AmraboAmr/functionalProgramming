@@ -103,6 +103,24 @@
             width: 2rem;
             height: 20px;
         }
+        .star-color{
+            color: coral;
+        }
+        .addFav{
+            cursor: pointer;
+            display: none;
+
+        }
+        @media only screen and (max-width: 538px) {
+            .addFav{
+                display: inline-block;
+            }
+            #favList{
+                display: none;
+            }
+
+        }
+
 
 
     </style>
@@ -150,13 +168,13 @@
                     </button>
 
                     <ul class="element-bg w-100 shadow-sm dropdown-menu border-0 fs-5   fw-semibold">
-                        <li><a class="dropdown-item" href="#">Favourites</a></li>
-                        <li><a class="dropdown-item" href="#">No Filter</a></li>
-                        <li><a class="dropdown-item" href="#">Africa</a></li>
-                        <li><a class="dropdown-item" href="#">Americas</a></li>
-                        <li><a class="dropdown-item" href="#">Asia</a></li>
-                        <li><a class="dropdown-item" href="#">Europe</a></li>
-                        <li><a class="dropdown-item" href="#">Oceania</a></li>
+                        <li><a href="#"><option class="dropdown-item" value="favs">Favourites</option></a></li>
+                        <li><a href="#"><option class="dropdown-item" value="" >No Filter</option></a></li>
+                        <li><a href="#"><option class="dropdown-item" value="Africa" >Africa</option></a></li>
+                        <li><a href="#"><option class="dropdown-item" value="Americas" >Americas</option></a></li>
+                        <li><a href="#"><option class="dropdown-item" value="Asia" >Asia</option></a></li>
+                        <li><a href="#"><option class="dropdown-item" value="Europe" >Europe</option></a></li>
+                        <li><a href="#"><option class="dropdown-item" value="Oceania" >Oceania</option></a></li>
                     </ul>
                 </div>
 
@@ -168,7 +186,7 @@
 
     <div style="overflow: hidden;" class="container ">
         <div class="row justify-content-between gx-4 ">
-            <div class=" col-3 px-3 ">
+            <div class=" d-xsm-none d-md-block col-3 px-3 ">
                 <div id="favList" class="shadow-sm element-bg rounded" >
 
                     <div class="p-3">
@@ -183,7 +201,7 @@
                 </div>
             </div>
 
-            <div class="col-9">
+            <div class="col-sm-9">
 
                 <div id="countries" class="row px-5 px-sm-0  g-5   ">
 
