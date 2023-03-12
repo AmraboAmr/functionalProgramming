@@ -11,8 +11,7 @@ let countries = [];
 let favorites = getFromLocalStorage(FAV_KEY) || [];
 let filter = "";
 function removeFavHandler(countryCode) {
-    let unFav = countries.find((country) => country.cca3 === countryCode);
-    favorites = removeFav(favorites, unFav);
+    favorites = removeFav(favorites, countryCode);
     favouritesUpdateHandler();
 
 
@@ -32,7 +31,9 @@ function addFavHandler(countryCode) {
 
 async function loadAndShowCountries(searchValue) {
     countries = await loadCountries(searchValue);
-    renderCountries(filterCountries(countries, filter),favorites,addFavHandler,removeFavHandler);
+    let favCountriesCodes = favorites.map((fav) => fav.cca3);
+
+    renderCountries(filterCountries(countries, filter,favCountriesCodes),favCountriesCodes,addFavHandler,removeFavHandler);
 }
 
 async function init() {
@@ -41,20 +42,18 @@ async function init() {
     });
 
     onSearch( async (searchValue) => {
-       await  loadAndShowCountries(searchValue, filter);
+       await  loadAndShowCountries(searchValue);
     });
 
     onFilterChange(async (selectedFilter) => {
         filter = selectedFilter;
-        let favCountriesCodes = favorites.map((fav) => fav.cca3);
 
-        renderCountries(filterCountries(countries, filter, favCountriesCodes));
-
+        await loadAndShowCountries(null);
     });
 
 
    await loadAndShowCountries(null);
-   
+
 
     onFavDrop(async (droppedCountryCode) => {
         let alreadyFavCode = favorites.find((country) => country.cca3 === droppedCountryCode);

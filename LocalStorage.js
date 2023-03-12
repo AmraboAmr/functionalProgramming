@@ -10,6 +10,6 @@ export let getFromLocalStorage = function (key) {
     try {
         return JSON.parse(localStorage.getItem(key));
     } catch {
-        return undefined; // or load from memory/variable
+        return undefined;
     }
 }

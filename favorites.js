@@ -1,20 +1,18 @@
-export function removeFav(favorites, country) {
+export function removeFav(favorites, countryCode) {
     let favArray = [...favorites];
-    favArray.splice(favArray.indexOf(country), 1);
+    favArray.splice(favArray.indexOf(favArray.find((fav) => fav.cca3 === countryCode)), 1);
 
-    let favItem = document.getElementById('c' + country.cca3).parentElement;
-    favItem.style.display = 'none';
-    favItem.classList.remove('d-flex');
+
 
     return favArray;
 }
 
-export function addFav(favorites, draggedCountry) {
+export function addFav(favorites, country) {
     let favArray = [...favorites];
-    let alreadyFavCode = favArray.find((country) => country.cca3 === draggedCountry.cca3);
-    if (!alreadyFavCode) {
+    let alreadyFav = favArray.find((fav) => fav.cca3 === country.cca3);
+    if (!alreadyFav) {
 
-        favArray.push(draggedCountry);
+        favArray.push(country);
 
     }
     return favArray;
