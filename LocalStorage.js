@@ -1,6 +1,3 @@
-
-
-
 export let setInLocalStorage = function (key, value) {
     try {
         localStorage.setItem(key, JSON.stringify(value));

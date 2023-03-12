@@ -37,7 +37,6 @@ export function onFavDrop(callBack) {
 
     favList.addEventListener('drop', async (e) => {
         favList.classList.remove("hovered");
-        console.log(e.dataTransfer.getData("text"));
         callBack(e.dataTransfer.getData("text"));
     });
 }
@@ -75,29 +74,29 @@ export function onFilterChange(callBack) {
 
 }
 
-export function renderCountries(countries, callback) {
+export function renderCountries(countries,fav,addFav,removeFav) {
     let countriesContainer = document.getElementById("countries");
     countriesContainer.innerHTML = "";
     if (countries) {
+        let favCodes= fav.map((favCountry)=> favCountry.cca3);
 
-        countries.forEach(c => {
+        countries.forEach(country => {
             let name, population, capital, flag, code, region;
-
-            name = c.name.common;
-            population = c.population;
-            capital = c.capital;
-            flag = c.flags.svg;
-            code = c.cca3;
-            region = c.region;
-            let countryCard = document.createElement('a');
-            countryCard.href = `details.html?id=${code}`;
+            name = country.name.common;
+            population = country.population;
+            capital = country.capital;
+            flag = country.flags.svg;
+            code = country.cca3;
+            region = country.region;
+            let countryCard = document.createElement('div');
+           // countryCard.href = `details.html?id=${code}`;
             countryCard.setAttribute('draggable', `true`);
             countryCard.classList.add('country', 'col-lg-4', 'col-md-6');
 
             countryCard.innerHTML += `
         <div class="rounded border-0 element-bg shadow-sm  h-100  " style="overflow: hidden;">
        
-            <img draggable="false" class="card-img-top  " src="${flag}" alt="${name}" >
+            <a draggable="false" href="details.html?id=${code}"><img draggable="false"  class="card-img-top  " src="${flag}" alt="${name}" ></a>
             
             <div class="text-color  ps-3   fw-semibold ">
                 <div class="py-3 fs-5 fw-bold">${name}</div>
@@ -107,7 +106,7 @@ export function renderCountries(countries, callback) {
                 
             </div>
             <div style="color: darkgray" class="text-end mt-3" >
-             <i id='s${code}' class="m-2 bi bi-star-fill addFav"></i>
+             <i  class="m-2 bi bi-star-fill addFav ${favCodes.includes(code)?'favourite':''}"></i>
 </div>
         </div>
     `;
@@ -124,7 +123,12 @@ export function renderCountries(countries, callback) {
             countryCard.addEventListener('dragend', (event) => {
                 event.target.style.opacity = '1';
             });
+            countryCard.querySelector('i').addEventListener('click', (evt) => {
+                evt.target.classList.contains('favourite') ? removeFav(code) : addFav(code);
+                evt.target.classList.toggle('favourite');
+            });
             countriesContainer.appendChild(countryCard);
+
 
         });
 
