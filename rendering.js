@@ -13,10 +13,10 @@ export function renderFavCountries(favCountries, removeFav) {
                                 <span class="fs-7 fw-semibold">${country.name.common}</span>
                             </div>
                             </a>
-                            <i id='c${country.cca3}' class="bi bi-x-circle-fill text-color removeFav"></i>`;
+                            <button id='c${country.cca3}' class="button button5 fw-bold text-color main-bg">x</button>`;
 
         favourites.appendChild(favCountry);
-        favCountry.querySelector('i').addEventListener('click', (evt) => {
+        favCountry.querySelector('button').addEventListener('click', (evt) => {
             let favItem = evt.target.parentElement;
             favItem.style.display = 'none';
             favItem.classList.remove('d-flex');
@@ -92,7 +92,6 @@ export function renderCountries(countries, favCodes, addFav, removeFav) {
             code = country.cca3;
             region = country.region;
             let countryCard = document.createElement('div');
-            // countryCard.href = `details.html?id=${code}`;
             countryCard.setAttribute('draggable', `true`);
             countryCard.classList.add('country', 'col-lg-4', 'col-md-6');
 
@@ -101,7 +100,7 @@ export function renderCountries(countries, favCodes, addFav, removeFav) {
        
             <a draggable="false" href="details.html?id=${code}"><img draggable="false"  class="card-img-top  " src="${flag}" alt="${name}" ></a>
             
-            <div class="text-color  ps-3   fw-semibold ">
+            <div class="text-color  ps-4   fw-semibold ">
                 <div class="py-3 fs-5 fw-bold">${name}</div>
                 <div class=" fs-7 fw-semibold">Population: <span class=" fw-light feature-value color-text">${population.toLocaleString()}</span></div>
                 <div class=" fs-7 fw-semibold">Region: <span class=" feature-value fw-light">${region}</span></div>

@@ -1,6 +1,11 @@
 export function removeFav(favorites, countryCode) {
     let favArray = [...favorites];
-    favArray.splice(favArray.indexOf(favArray.find((fav) => fav.cca3 === countryCode)), 1);
+    let alreadyFav = favArray.find((fav) => fav.cca3 === countryCode);
+    if(alreadyFav){
+        favArray.splice(favArray.indexOf(alreadyFav), 1);
+
+    }
+
 
 
 

@@ -1,11 +1,16 @@
+import {onThemeChange} from "./theme.js";
+import {getFromLocalStorage, setInLocalStorage} from "./LocalStorage.js";
+import {DARK_KEY} from "./constans.js";
+
 let details=document.getElementById("details");
 let darkMode=document.getElementById("darkMode");
 let isDarkMode = localStorage.getItem("dark-mode");
 let body = document.body;
-//let countryId = window.location.search.split('id=')[1];
 let url=new URLSearchParams(window.location.search);
 let countryId=url.get('id');
-
+onThemeChange(getFromLocalStorage(DARK_KEY)|| false,(isDarkMode)=>{
+    setInLocalStorage(DARK_KEY,isDarkMode);
+});
 function getDetails(data) {
     let name,native,subRegion,tld,currencies,languages, population, region, capital, flag;
 
@@ -51,23 +56,23 @@ tld=data.tld[0];
                 <div class="fs-2   fw-bold ">${name}</div>
                 <div class="fs-6 fw-semibold row justify-content-between ">
 
-                    <div class="col col-lg-5 mt-4">
+                    <div class="col col-lg-5 mt-4 text-color">
 
 
-                        <div class="">Native Name: <span class="feature-value text-muted">${native}</span></div>
-                        <div class="">Population: <span class="feature-value text-muted">${population.toLocaleString()}</span></div>
-                        <div class="">Region: <span class="feature-value text-muted">${region}</span></div>
-                        <div class="">Sub Region: <span class=" feature-value text-muted">${subRegion}</span></div>
-                        <div class="">Capital: <span class="feature-value text-muted">${capital}</span></div>
+                        <div class="">Native Name: <span class="feature-value fw-light text-color">${native}</span></div>
+                        <div class="">Population: <span class="feature-value fw-light text-color">${population.toLocaleString()}</span></div>
+                        <div class="">Region: <span class="feature-value fw-light text-color">${region}</span></div>
+                        <div class="">Sub Region: <span class=" feature-value fw-light text-color">${subRegion}</span></div>
+                        <div class="">Capital: <span class="feature-value fw-light text-color">${capital}</span></div>
 
                     </div>
                     <div class="mt-4 col-lg-6 ">
 
 
-                        <div class="">Top Level Domain: <span class="feature-value text-muted">${tld}</span></div>
+                        <div class="">Top Level Domain: <span class="feature-value fw-light text-color">${tld}</span></div>
 
-                        <div class="">Currencies: <span class="feature-value text-muted">${currencies}</span></div>
-                        <div class="">Languages: <span class="feature-value text-muted">${languages}</span></div>
+                        <div class="">Currencies: <span class="feature-value fw-light text-color">${currencies}</span></div>
+                        <div class="">Languages: <span class="feature-value fw-light text-color">${languages}</span></div>
 
 
                     </div>
@@ -107,7 +112,7 @@ function getBorders(country){
         allData.then((res) => {
 
             for(let border of res){
-                bordersDiv.innerHTML+=` <button class="btn shadow-sm main-bg px-4 me-1" type="button">${border[0].name.common }</button>`;
+                bordersDiv.innerHTML+=` <button class="btn shadow-sm main-bg px-4 me-1 text-color" type="button">${border[0].name.common }</button>`;
             }
         });
 
